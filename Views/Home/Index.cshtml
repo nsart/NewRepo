@@ -1,0 +1,44 @@
+﻿@using HW3_Task1.Models
+@model CalcModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h1>Простий калькулятор</h1>        
+        <p>Будь ласка, наберіть 2 числа та натисніть на кнопку операції, яку бажаєте виконати з числами</p>
+    </div>
+    <div>       
+        <form action="/Home/Result" method="post">
+            <input type="text" name="Num1" id="Num1" placeholder="First operand" value="@(Model.Num1.HasValue? Model.Num1.Value : "")" />
+            <input type="text" name="Num2" id="Num2" placeholder="First operand" value="@(Model.Num2.HasValue? Model.Num2.Value : "")" />
+            <input type="submit" name="actionButton" value="+" />
+            <input type="submit" name="actionButton" value="-" />
+            <input type="submit" name="actionButton" value="/" />
+            <input type="submit" name="actionButton" value="*" />
+        </form>
+
+        @if (Model.Result.HasValue)
+        {
+            <p>Результат @(Model.OperationName != null ? Model.OperationName : "операції не визначено") </p>
+            <input type="text" id="resultcalc" name="resultcalc" readonly placeholder="ViewBag.Text" value="@Model.Result.Value" />
+        }
+
+        else
+        {
+            <input type="text" id="resultcalc" name="resultcalc" readonly placeholder="Operation result">
+        }
+    </div>
+</body>
+</html>
